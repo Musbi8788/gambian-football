@@ -68,6 +68,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'football.wsgi.application'
 
+# static url
+STATIC_URL = '/static/'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
