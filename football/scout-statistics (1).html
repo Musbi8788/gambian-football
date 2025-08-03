@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="scout-dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="scout-search.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>Player Search</span>
+                </a>
+                <a href="scout-profile.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="scout-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">5</span>
+                </a>
+                <a href="scout-applications.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                </a>
+                <a href="scout-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="scout-statistics.html" class="nav-item active">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="scout-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Scout" alt="Scout Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">John Smith</div>
+                        <div class="user-role">Scout - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Statistics & Analytics</h1>
+                </div>
+                <div class="header-right">
+                    <div class="date-range-picker">
+                        <select id="timeRange" onchange="updateTimeRange()">
+                            <option value="7d">Last 7 days</option>
+                            <option value="30d" selected>Last 30 days</option>
+                            <option value="90d">Last 90 days</option>
+                            <option value="1y">Last year</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline" onclick="exportReport()">
+                        <i class="fas fa-download"></i>
+                        Export Report
+                    </button>
+                </div>
+            </header>
+
+            <!-- Statistics Content -->
+            <div class="dashboard-content">
+                <!-- Overview Stats -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Players Scouted</h3>
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">156</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+23 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Successful Signings</h3>
+                                <div class="stat-icon success">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">23</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Success Rate</h3>
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">68%</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3% improvement</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Active Opportunities</h3>
+                                <div class="stat-icon info">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                <span>3 closing soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="charts-section">
+                    <div class="charts-grid">
+                        <!-- Scouting Activity Chart -->
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>Scouting Activity</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-btn active" data-chart="players">Players</button>
+                                    <button class="chart-btn" data-chart="opportunities">Opportunities</button>
+                                    <button class="chart-btn" data-chart="applications">Applications</button>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container">
+                                    <canvas id="activityChart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Rate Chart -->
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>Success Rate by Position</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container">
+                                    <canvas id="successChart" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Performance Metrics -->
+                <section class="metrics-section">
+                    <div class="section-header">
+                        <h2>Performance Metrics</h2>
+                    </div>
+                    <div class="metrics-grid">
+                        <!-- Player Discovery Metrics -->
+                        <div class="card metric-card">
+                            <div class="card-header">
+                                <h3>Player Discovery</h3>
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-list">
+                                    <div class="metric-item">
+                                        <div class="metric-info">
+                                            <span class="metric-label">Players Viewed</span>
+                                            <span class="metric-value">1,247</span>
+                                        </div>
+                                        <div class="metric-bar">
+                                            <div class="metric-progress" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-info">
+                                            <span class="metric-label">Players Contacted</span>
+                                            <span class="metric-value">342</span>
+                                        </div>
+                                        <div class="metric-bar">
+                                            <div class="metric-progress" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-info">
+                                            <span class="metric-label">Players Shortlisted</span>
+                                            <span class="metric-value">89</span>
+                                        </div>
+                                        <div class="metric-bar">
+                                            <div class="metric-progress" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-info">
+                                            <span class="metric-label">Players Signed</span>
+                                            <span class="metric-value">23</span>
+                                        </div>
+                                        <div class="metric-bar">
+                                            <div class="metric-progress" style="width: 25%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Regional Performance -->
+                        <div class="card metric-card">
+                            <div class="card-header">
+                                <h3>Regional Performance</h3>
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="region-stats">
+                                    <div class="region-item">
+                                        <div class="region-info">
+                                            <span class="region-name">Banjul</span>
+                                            <span class="region-count">45 players</span>
+                                        </div>
+                                        <div class="region-success">
+                                            <span class="success-rate">72%</span>
+                                        </div>
+                                    </div>
+                                    <div class="region-item">
+                                        <div class="region-info">
+                                            <span class="region-name">Kanifing</span>
+                                            <span class="region-count">38 players</span>
+                                        </div>
+                                        <div class="region-success">
+                                            <span class="success-rate">68%</span>
+                                        </div>
+                                    </div>
+                                    <div class="region-item">
+                                        <div class="region-info">
+                                            <span class="region-name">Brikama</span>
+                                            <span class="region-count">29 players</span>
+                                        </div>
+                                        <div class="region-success">
+                                            <span class="success-rate">65%</span>
+                                        </div>
+                                    </div>
+                                    <div class="region-item">
+                                        <div class="region-info">
+                                            <span class="region-name">Other Regions</span>
+                                            <span class="region-count">44 players</span>
+                                        </div>
+                                        <div class="region-success">
+                                            <span class="success-rate">58%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Position Analysis -->
+                        <div class="card metric-card">
+                            <div class="card-header">
+                                <h3>Position Analysis</h3>
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="position-chart">
+                                    <canvas id="positionChart" width="300" height="300"></canvas>
+                                </div>
+                                <div class="position-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #3B82F6;"></div>
+                                        <span>Forwards (35%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #10B981;"></div>
+                                        <span>Midfielders (28%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #F59E0B;"></div>
+                                        <span>Defenders (25%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #EF4444;"></div>
+                                        <span>Goalkeepers (12%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="activity-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <button class="btn btn-outline btn-sm" onclick="viewAllActivity()">
+                            View All
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="activity-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker success">
+                                        <i class="fas fa-handshake"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Player Signed</h4>
+                                        <p>Lamin Touray successfully signed with Hawks FC</p>
+                                        <span class="timeline-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker primary">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Player Profile Viewed</h4>
+                                        <p>Viewed profile of Amadou Jallow (Forward)</p>
+                                        <span class="timeline-time">4 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker warning">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Opportunity Posted</h4>
+                                        <p>Posted new midfielder position opportunity</p>
+                                        <span class="timeline-time">1 day ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker info">
+                                        <i class="fas fa-comments"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Message Sent</h4>
+                                        <p>Contacted Fatou Ceesay regarding trial opportunity</p>
+                                        <span class="timeline-time">2 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker success">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h4>Player Shortlisted</h4>
+                                        <p>Added Omar Bah to shortlist for winger position</p>
+                                        <span class="timeline-time">3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Top Performers -->
+                <section class="performers-section">
+                    <div class="section-header">
+                        <h2>Top Performing Players</h2>
+                        <select id="performanceMetric" onchange="updatePerformers()">
+                            <option value="rating">By Rating</option>
+                            <option value="goals">By Goals</option>
+                            <option value="assists">By Assists</option>
+                            <option value="matches">By Matches</option>
+                        </select>
+                    </div>
+                    <div class="performers-grid">
+                        <div class="card performer-card">
+                            <div class="card-content">
+                                <div class="performer-rank">1</div>
+                                <div class="performer-info">
+                                    <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player" class="performer-photo">
+                                    <div class="performer-details">
+                                        <h4>Amadou Jallow</h4>
+                                        <p>Forward • Hawks FC</p>
+                                        <div class="performer-stats">
+                                            <span>Rating: 4.8/5</span>
+                                            <span>18 Goals</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="performer-badge gold">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card performer-card">
+                            <div class="card-content">
+                                <div class="performer-rank">2</div>
+                                <div class="performer-info">
+                                    <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player" class="performer-photo">
+                                    <div class="performer-details">
+                                        <h4>Fatou Ceesay</h4>
+                                        <p>Midfielder • Real de Banjul</p>
+                                        <div class="performer-stats">
+                                            <span>Rating: 4.6/5</span>
+                                            <span>12 Assists</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="performer-badge silver">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card performer-card">
+                            <div class="card-content">
+                                <div class="performer-rank">3</div>
+                                <div class="performer-info">
+                                    <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player" class="performer-photo">
+                                    <div class="performer-details">
+                                        <h4>Lamin Touray</h4>
+                                        <p>Defender • Wallidan FC</p>
+                                        <div class="performer-stats">
+                                            <span>Rating: 4.4/5</span>
+                                            <span>156 Tackles</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="performer-badge bronze">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .date-range-picker select {
+            padding: var(--space-sm) var(--space);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            background: var(--background);
+            margin-right: var(--space);
+        }
+        
+        .charts-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-xl);
+        }
+        
+        .chart-card {
+            min-height: 400px;
+        }
+        
+        .chart-controls {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .chart-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: var(--space-sm) var(--space);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .chart-btn:hover {
+            background: var(--surface-alt);
+        }
+        
+        .chart-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: var(--space-lg);
+        }
+        
+        .chart-container canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .metric-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .metric-card .card-header i {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+        
+        .metric-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .metric-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .metric-bar {
+            height: 8px;
+            background: var(--surface-alt);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .metric-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-red));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .region-stats {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .region-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .region-item:last-child {
+            border-bottom: none;
+        }
+        
+        .region-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .region-count {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .success-rate {
+            font-weight: 600;
+            color: var(--success);
+        }
+        
+        .position-chart {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .position-legend {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.875rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .activity-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: var(--space-lg);
+            position: relative;
+        }
+        
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% + var(--space-lg));
+            background: var(--border-light);
+        }
+        
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .timeline-marker.success {
+            background: var(--success);
+        }
+        
+        .timeline-marker.primary {
+            background: var(--primary-blue);
+        }
+        
+        .timeline-marker.warning {
+            background: var(--warning);
+        }
+        
+        .timeline-marker.info {
+            background: var(--info);
+        }
+        
+        .timeline-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .timeline-time {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .performers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .performer-card {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .performer-card .card-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+        
+        .performer-rank {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            width: 40px;
+            text-align: center;
+        }
+        
+        .performer-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space);
+            flex: 1;
+        }
+        
+        .performer-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+        }
+        
+        .performer-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .performer-details p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .performer-stats {
+            display: flex;
+            gap: var(--space);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .performer-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+        
+        .performer-badge.gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        
+        .performer-badge.silver {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+        }
+        
+        .performer-badge.bronze {
+            background: linear-gradient(135deg, #CD7F32, #B8860B);
+        }
+        
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .performers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .performer-card .card-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .performer-rank {
+                order: -1;
+            }
+        }
+    </style>
+    
+    <script>
+        // Statistics functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+        
+        function initializeCharts() {
+            // Initialize activity chart (simplified for demo)
+            const activityCtx = document.getElementById('activityChart');
+            if (activityCtx) {
+                // In a real app, you would use Chart.js or similar library
+                activityCtx.style.background = 'linear-gradient(45deg, #f0f9ff, #e0f2fe)';
+                activityCtx.style.borderRadius = '8px';
+            }
+            
+            // Initialize success chart
+            const successCtx = document.getElementById('successChart');
+            if (successCtx) {
+                successCtx.style.background = 'linear-gradient(45deg, #f0fdf4, #dcfce7)';
+                successCtx.style.borderRadius = '8px';
+            }
+            
+            // Initialize position chart
+            const positionCtx = document.getElementById('positionChart');
+            if (positionCtx) {
+                positionCtx.style.background = 'linear-gradient(45deg, #fefce8, #fef3c7)';
+                positionCtx.style.borderRadius = '8px';
+            }
+        }
+        
+        function updateTimeRange() {
+            const timeRange = document.getElementById('timeRange').value;
+            showNotification(`Updated statistics for ${timeRange}`, 'info');
+            // In real app, this would fetch new data
+        }
+        
+        function exportReport() {
+            showNotification('Generating report... This may take a moment.', 'info');
+            setTimeout(() => {
+                showNotification('Report exported successfully!', 'success');
+            }, 2000);
+        }
+        
+        function viewAllActivity() {
+            showNotification('Loading complete activity history...', 'info');
+        }
+        
+        function updatePerformers() {
+            const metric = document.getElementById('performanceMetric').value;
+            showNotification(`Updated performers ranking by ${metric}`, 'info');
+        }
+        
+        // Chart controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartBtns = document.querySelectorAll('.chart-btn');
+            chartBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const chartType = this.dataset.chart;
+                    
+                    // Remove active class from all buttons in this group
+                    const parentControls = this.closest('.chart-controls');
+                    parentControls.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    showNotification(`Switched to ${chartType} view`, 'info');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

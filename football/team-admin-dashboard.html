@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Admin Dashboard - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="team-admin-dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="team-admin-players.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Players</span>
+                </a>
+                <a href="team-admin-profile.html" class="nav-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Club Profile</span>
+                </a>
+                <a href="team-admin-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">8</span>
+                </a>
+                <a href="team-admin-applications.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                    <span class="badge badge-warning">12</span>
+                </a>
+                <a href="team-admin-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="team-admin-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="team-admin-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Admin" alt="Admin Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-role">Admin - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Team Admin Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notifications">
+                        <button class="notification-btn" onclick="toggleNotifications()">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">5</span>
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <button class="mark-all-read" onclick="markAllRead()">Mark all read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-user-plus text-primary"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>New application from <strong>Amadou Jallow</strong></p>
+                                        <span class="notification-time">30 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-comments text-success"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>Message from scout <strong>John Smith</strong></p>
+                                        <span class="notification-time">1 hour ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-calendar text-info"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>Training session scheduled for tomorrow</p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="team-admin-messages.html">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="welcome-content">
+                                <div class="welcome-text">
+                                    <h2>Welcome back, Sarah! ⚽</h2>
+                                    <p>Manage your team, review applications, and grow Hawks FC.</p>
+                                </div>
+                                <div class="welcome-actions">
+                                    <a href="team-admin-applications.html" class="btn btn-primary">
+                                        <i class="fas fa-file-alt"></i>
+                                        Review Applications (12)
+                                    </a>
+                                    <a href="team-admin-opportunities.html" class="btn btn-outline">
+                                        <i class="fas fa-plus"></i>
+                                        Post Opportunity
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stats Grid -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Squad Size</h3>
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">28</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">New Applications</h3>
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5 this week</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Active Opportunities</h3>
+                                <div class="stat-icon success">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">6</div>
+                            <div class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                <span>2 closing soon</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Monthly Budget</h3>
+                                <div class="stat-icon info">
+                                    <i class="fas fa-money-bill"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">GMD 450K</div>
+                            <div class="stat-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>75% used</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <a href="team-admin-applications.html" class="btn btn-outline btn-sm">View All</a>
+                    </div>
+                    <div class="card">
+                        <div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Activity</th>
+                                        <th>Player/Scout</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="activity-item">
+                                                <i class="fas fa-file-alt text-primary"></i>
+                                                <span>New Application</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="profile-card">
+                                                <div class="profile-avatar">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Player" alt="Player">
+                                                </div>
+                                                <div class="profile-info">
+                                                    <h4>Amadou Jallow</h4>
+                                                    <p>Forward • 22 years</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>30 minutes ago</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-outline btn-sm" onclick="reviewApplication('amadou-jallow')">
+                                                <i class="fas fa-eye"></i>
+                                                Review
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="activity-item">
+                                                <i class="fas fa-comments text-success"></i>
+                                                <span>Scout Message</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="profile-card">
+                                                <div class="profile-avatar">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Scout" alt="Scout">
+                                                </div>
+                                                <div class="profile-info">
+                                                    <h4>John Smith</h4>
+                                                    <p>Scout • Hawks FC</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>1 hour ago</td>
+                                        <td><span class="badge badge-info">New</span></td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="viewMessage('john-smith')">
+                                                <i class="fas fa-comments"></i>
+                                                Reply
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="activity-item">
+                                                <i class="fas fa-handshake text-success"></i>
+                                                <span>Player Signed</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="profile-card">
+                                                <div class="profile-avatar">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Player" alt="Player">
+                                                </div>
+                                                <div class="profile-info">
+                                                    <h4>Lamin Touray</h4>
+                                                    <p>Defender • 24 years</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>2 days ago</td>
+                                        <td><span class="badge badge-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-outline btn-sm" onclick="viewContract('lamin-touray')">
+                                                <i class="fas fa-file-contract"></i>
+                                                Contract
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Squad Overview -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Squad Overview</h2>
+                        <a href="team-admin-players.html" class="btn btn-outline btn-sm">Manage Squad</a>
+                    </div>
+                    <div class="squad-overview">
+                        <div class="position-breakdown">
+                            <div class="position-card">
+                                <div class="position-header">
+                                    <h3>Goalkeepers</h3>
+                                    <span class="position-count">3</span>
+                                </div>
+                                <div class="position-players">
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=GK" alt="Goalkeeper">
+                                        <span>Bakary Sanneh</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=GK" alt="Goalkeeper">
+                                        <span>Modou Jobe</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=GK" alt="Goalkeeper">
+                                        <span>Ousman Ceesay</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-card">
+                                <div class="position-header">
+                                    <h3>Defenders</h3>
+                                    <span class="position-count">8</span>
+                                </div>
+                                <div class="position-players">
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=DEF" alt="Defender">
+                                        <span>Lamin Touray</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=DEF" alt="Defender">
+                                        <span>Ebrima Darboe</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=DEF" alt="Defender">
+                                        <span>Sulayman Bojang</span>
+                                    </div>
+                                    <div class="more-players">+5 more</div>
+                                </div>
+                            </div>
+
+                            <div class="position-card">
+                                <div class="position-header">
+                                    <h3>Midfielders</h3>
+                                    <span class="position-count">10</span>
+                                </div>
+                                <div class="position-players">
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=MID" alt="Midfielder">
+                                        <span>Fatou Ceesay</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=MID" alt="Midfielder">
+                                        <span>Musa Barrow</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=MID" alt="Midfielder">
+                                        <span>Alieu Fadera</span>
+                                    </div>
+                                    <div class="more-players">+7 more</div>
+                                </div>
+                            </div>
+
+                            <div class="position-card">
+                                <div class="position-header">
+                                    <h3>Forwards</h3>
+                                    <span class="position-count">7</span>
+                                </div>
+                                <div class="position-players">
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=FWD" alt="Forward">
+                                        <span>Amadou Jallow</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=FWD" alt="Forward">
+                                        <span>Assan Ceesay</span>
+                                    </div>
+                                    <div class="player-mini">
+                                        <img src="/placeholder.svg?height=40&width=40&text=FWD" alt="Forward">
+                                        <span>Bubacarr Jobe</span>
+                                    </div>
+                                    <div class="more-players">+4 more</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Events -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Upcoming Events</h2>
+                        <button class="btn btn-outline btn-sm" onclick="addEvent()">
+                            <i class="fas fa-plus"></i>
+                            Add Event
+                        </button>
+                    </div>
+                    <div class="events-grid">
+                        <div class="card event-card">
+                            <div class="card-content">
+                                <div class="event-header">
+                                    <div class="event-type training">
+                                        <i class="fas fa-running"></i>
+                                        <span>Training</span>
+                                    </div>
+                                    <div class="event-date">
+                                        <span class="date">Tomorrow</span>
+                                        <span class="time">9:00 AM</span>
+                                    </div>
+                                </div>
+                                <h3>Morning Training Session</h3>
+                                <p>Regular training session focusing on tactical formations and set pieces.</p>
+                                <div class="event-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Hawks FC Training Ground</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card event-card">
+                            <div class="card-content">
+                                <div class="event-header">
+                                    <div class="event-type match">
+                                        <i class="fas fa-futbol"></i>
+                                        <span>Match</span>
+                                    </div>
+                                    <div class="event-date">
+                                        <span class="date">Saturday</span>
+                                        <span class="time">4:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Hawks FC vs Real de Banjul</h3>
+                                <p>League match against Real de Banjul at Independence Stadium.</p>
+                                <div class="event-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Independence Stadium, Bakau</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card event-card">
+                            <div class="card-content">
+                                <div class="event-header">
+                                    <div class="event-type meeting">
+                                        <i class="fas fa-users"></i>
+                                        <span>Meeting</span>
+                                    </div>
+                                    <div class="event-date">
+                                        <span class="date">Monday</span>
+                                        <span class="time">2:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Board Meeting</h3>
+                                <p>Monthly board meeting to discuss club strategy and budget.</p>
+                                <div class="event-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Hawks FC Boardroom</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .squad-overview {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .position-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .position-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            transition: var(--transition);
+        }
+        
+        .position-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .position-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .position-count {
+            background: var(--primary-blue);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .position-players {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space);
+        }
+        
+        .player-mini {
+            display: flex;
+            align-items: center;
+            gap: var(--space);
+            padding: var(--space-sm);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .player-mini:hover {
+            background: var(--surface-alt);
+        }
+        
+        .player-mini img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+        
+        .player-mini span {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .more-players {
+            padding: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-align: center;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .more-players:hover {
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .event-card {
+            transition: var(--transition);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space);
+        }
+        
+        .event-type {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .event-type.training {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .event-type.match {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+        }
+        
+        .event-type.meeting {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .event-date {
+            text-align: right;
+        }
+        
+        .event-date .date {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+        
+        .event-date .time {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+        
+        .event-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .event-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            line-height: 1.5;
+        }
+        
+        .event-location {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .position-breakdown {
+                grid-template-columns: 1fr;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-content {
+                flex-direction: column;
+                gap: var(--space-lg);
+                align-items: flex-start;
+            }
+            
+            .welcome-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+    
+    <script>
+        // Team admin specific functions
+        function reviewApplication(playerId) {
+            window.location.href = 'team-admin-applications.html';
+        }
+        
+        function viewMessage(userId) {
+            window.location.href = 'team-admin-messages.html';
+        }
+        
+        function viewContract(playerId) {
+            showNotification(`Opening contract details for ${playerId}`, 'info');
+        }
+        
+        function addEvent() {
+            showNotification('Opening event creation form...', 'info');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="scout-dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="scout-search.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>Player Search</span>
+                </a>
+                <a href="scout-profile.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="scout-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">5</span>
+                </a>
+                <a href="scout-applications.html" class="nav-item active">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                </a>
+                <a href="scout-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="scout-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="scout-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Scout" alt="Scout Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">John Smith</div>
+                        <div class="user-role">Scout - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Applications</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-filters">
+                        <select id="statusFilter" onchange="filterApplications()">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="reviewed">Reviewed</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                        <select id="sortBy" onchange="sortApplications()">
+                            <option value="date">Sort by Date</option>
+                            <option value="status">Sort by Status</option>
+                            <option value="player">Sort by Player</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Applications Content -->
+            <div class="dashboard-content">
+                <!-- Applications Stats -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Total Applications</h3>
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">47</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+12 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Pending Review</h3>
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">8</div>
+                            <div class="stat-change">
+                                <i class="fas fa-exclamation"></i>
+                                <span>Requires attention</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Approved</h3>
+                                <div class="stat-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">23</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5 this week</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Success Rate</h3>
+                                <div class="stat-icon info">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">68%</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3% improvement</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Applications List -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Recent Applications</h2>
+                        <div class="applications-summary">
+                            <span>Showing 15 of 47 applications</span>
+                        </div>
+                    </div>
+
+                    <div class="applications-list">
+                        <!-- Application Card 1 -->
+                        <div class="card application-card" data-status="pending">
+                            <div class="card-content">
+                                <div class="application-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Amadou Jallow</h3>
+                                            <p class="player-position">Forward • 22 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Banjul • Hawks FC
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="application-status">
+                                        <span class="badge badge-warning">Pending Review</span>
+                                        <div class="application-date">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>2 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="application-content">
+                                    <div class="application-type">
+                                        <i class="fas fa-handshake"></i>
+                                        <span>Interest Expression</span>
+                                    </div>
+                                    <div class="application-message">
+                                        <h4>Application Message</h4>
+                                        <p>"I am very interested in joining your club and believe my skills as a forward would be a great addition to your team. I have been following Hawks FC and admire the club's commitment to developing young talent..."</p>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Stats</h4>
+                                    <div class="stats-row">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Goals</span>
+                                            <span class="stat-value">18</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Assists</span>
+                                            <span class="stat-value">7</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Matches</span>
+                                            <span class="stat-value">25</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Rating</span>
+                                            <span class="stat-value">4.8/5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="application-actions">
+                                    <button class="btn btn-success btn-sm" onclick="approveApplication('amadou-jallow')">
+                                        <i class="fas fa-check"></i>
+                                        Approve
+                                    </button>
+                                    <button class="btn btn-error btn-sm" onclick="rejectApplication('amadou-jallow')">
+                                        <i class="fas fa-times"></i>
+                                        Reject
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewFullApplication('amadou-jallow')">
+                                        <i class="fas fa-eye"></i>
+                                        View Details
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactApplicant('amadou-jallow')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Card 2 -->
+                        <div class="card application-card" data-status="reviewed">
+                            <div class="card-content">
+                                <div class="application-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Fatou Ceesay</h3>
+                                            <p class="player-position">Midfielder • 20 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Kanifing • Real de Banjul
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="application-status">
+                                        <span class="badge badge-info">Under Review</span>
+                                        <div class="application-date">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>5 days ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="application-content">
+                                    <div class="application-type">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Trial Request</span>
+                                    </div>
+                                    <div class="application-message">
+                                        <h4>Application Message</h4>
+                                        <p>"I would like to request a trial opportunity with Hawks FC. I am a versatile midfielder with strong passing abilities and work ethic. I believe I can contribute significantly to your team's success..."</p>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Stats</h4>
+                                    <div class="stats-row">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Pass Accuracy</span>
+                                            <span class="stat-value">89%</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Assists</span>
+                                            <span class="stat-value">12</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Matches</span>
+                                            <span class="stat-value">23</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Rating</span>
+                                            <span class="stat-value">4.6/5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="review-notes">
+                                    <h4>Review Notes</h4>
+                                    <div class="note-item">
+                                        <div class="note-author">
+                                            <img src="/placeholder.svg?height=24&width=24&text=Scout" alt="Reviewer">
+                                            <span>John Smith</span>
+                                        </div>
+                                        <p>"Impressive passing statistics and good work rate. Would like to see her in a trial match to assess defensive capabilities."</p>
+                                        <span class="note-time">3 days ago</span>
+                                    </div>
+                                </div>
+
+                                <div class="application-actions">
+                                    <button class="btn btn-success btn-sm" onclick="approveApplication('fatou-ceesay')">
+                                        <i class="fas fa-check"></i>
+                                        Approve
+                                    </button>
+                                    <button class="btn btn-error btn-sm" onclick="rejectApplication('fatou-ceesay')">
+                                        <i class="fas fa-times"></i>
+                                        Reject
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="scheduleInterview('fatou-ceesay')">
+                                        <i class="fas fa-calendar-plus"></i>
+                                        Schedule Interview
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="addNote('fatou-ceesay')">
+                                        <i class="fas fa-sticky-note"></i>
+                                        Add Note
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Card 3 -->
+                        <div class="card application-card" data-status="approved">
+                            <div class="card-content">
+                                <div class="application-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Lamin Touray</h3>
+                                            <p class="player-position">Defender • 24 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Brikama • Wallidan FC
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="application-status">
+                                        <span class="badge badge-success">Approved</span>
+                                        <div class="application-date">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>1 week ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="application-content">
+                                    <div class="application-type">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Contract Offer</span>
+                                    </div>
+                                    <div class="application-message">
+                                        <h4>Application Message</h4>
+                                        <p>"I am interested in exploring opportunities with Hawks FC. As an experienced defender, I bring leadership qualities and strong defensive skills to strengthen your backline..."</p>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Stats</h4>
+                                    <div class="stats-row">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Tackles</span>
+                                            <span class="stat-value">156</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Interceptions</span>
+                                            <span class="stat-value">89</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Matches</span>
+                                            <span class="stat-value">28</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Rating</span>
+                                            <span class="stat-value">4.4/5</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="approval-details">
+                                    <div class="approval-info">
+                                        <i class="fas fa-check-circle text-success"></i>
+                                        <div>
+                                            <h4>Application Approved</h4>
+                                            <p>Contract offer sent to player. Awaiting response.</p>
+                                        </div>
+                                    </div>
+                                    <div class="next-steps">
+                                        <h4>Next Steps</h4>
+                                        <ul>
+                                            <li>Contract negotiation in progress</li>
+                                            <li>Medical examination scheduled</li>
+                                            <li>Player registration pending</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="application-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="viewContract('lamin-touray')">
+                                        <i class="fas fa-file-contract"></i>
+                                        View Contract
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="trackProgress('lamin-touray')">
+                                        <i class="fas fa-tasks"></i>
+                                        Track Progress
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactApplicant('lamin-touray')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Card 4 -->
+                        <div class="card application-card" data-status="rejected">
+                            <div class="card-content">
+                                <div class="application-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Omar Bah</h3>
+                                            <p class="player-position">Winger • 19 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Serrekunda • Youth Academy
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="application-status">
+                                        <span class="badge badge-error">Rejected</span>
+                                        <div class="application-date">
+                                            <i class="fas fa-calendar"></i>
+                                            <span>2 weeks ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="application-content">
+                                    <div class="application-type">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Youth Development</span>
+                                    </div>
+                                    <div class="application-message">
+                                        <h4>Application Message</h4>
+                                        <p>"I am a young winger looking for an opportunity to develop my skills at Hawks FC. I have good pace and crossing ability, and I'm eager to learn from experienced coaches..."</p>
+                                    </div>
+                                </div>
+
+                                <div class="rejection-details">
+                                    <div class="rejection-reason">
+                                        <i class="fas fa-times-circle text-error"></i>
+                                        <div>
+                                            <h4>Application Rejected</h4>
+                                            <p>Player needs more development time before joining senior squad.</p>
+                                        </div>
+                                    </div>
+                                    <div class="feedback-given">
+                                        <h4>Feedback Provided</h4>
+                                        <p>"Continue developing with youth academy for another season. Focus on improving decision-making and defensive work rate. We encourage you to reapply next year."</p>
+                                    </div>
+                                </div>
+
+                                <div class="application-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="provideFeedback('omar-bah')">
+                                        <i class="fas fa-comment-alt"></i>
+                                        Update Feedback
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="reconsiderApplication('omar-bah')">
+                                        <i class="fas fa-redo"></i>
+                                        Reconsider
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="archiveApplication('omar-bah')">
+                                        <i class="fas fa-archive"></i>
+                                        Archive
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-section">
+                        <div class="pagination">
+                            <button class="btn btn-outline btn-sm" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </button>
+                            <div class="page-numbers">
+                                <button class="btn btn-primary btn-sm">1</button>
+                                <button class="btn btn-outline btn-sm">2</button>
+                                <button class="btn btn-outline btn-sm">3</button>
+                                <span>...</span>
+                                <button class="btn btn-outline btn-sm">8</button>
+                            </div>
+                            <button class="btn btn-outline btn-sm">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .header-filters {
+            display: flex;
+            gap: var(--space);
+            align-items: center;
+        }
+        
+        .header-filters select {
+            padding: var(--space-sm) var(--space);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            background: var(--background);
+        }
+        
+        .applications-summary {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .application-card {
+            transition: var(--transition);
+        }
+        
+        .application-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-info {
+            display: flex;
+            gap: var(--space-lg);
+            flex: 1;
+        }
+        
+        .player-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+        }
+        
+        .player-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .player-position {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .player-location {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .player-location i {
+            margin-right: var(--space-sm);
+        }
+        
+        .application-status {
+            text-align: right;
+        }
+        
+        .application-date {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .application-content {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .application-type {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .application-message h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .application-message p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .player-highlights {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-highlights h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space);
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .review-notes {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+        }
+        
+        .review-notes h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space);
+        }
+        
+        .note-item {
+            border-left: 3px solid var(--primary-blue);
+            padding-left: var(--space);
+        }
+        
+        .note-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .note-author img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        
+        .note-author span {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+        
+        .note-item p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+            font-size: 0.875rem;
+        }
+        
+        .note-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .approval-details,
+        .rejection-details {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+        }
+        
+        .approval-details {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .rejection-details {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        
+        .approval-info,
+        .rejection-reason {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .approval-info h4,
+        .rejection-reason h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .approval-info p,
+        .rejection-reason p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .next-steps h4,
+        .feedback-given h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space);
+        }
+        
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .next-steps li {
+            padding: var(--space-sm) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--space-lg);
+        }
+        
+        .next-steps li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .feedback-given p {
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .application-actions {
+            display: flex;
+            gap: var(--space);
+            flex-wrap: wrap;
+        }
+        
+        .btn-error {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+        
+        .btn-error:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        @media (max-width: 768px) {
+            .application-header {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .player-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .application-actions {
+                justify-content: center;
+            }
+            
+            .header-filters {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+    </style>
+    
+    <script>
+        // Applications functionality
+        function filterApplications() {
+            const filter = document.getElementById('statusFilter').value;
+            const applications = document.querySelectorAll('.application-card');
+            
+            applications.forEach(app => {
+                const status = app.dataset.status;
+                if (filter === 'all' || status === filter) {
+                    app.style.display = 'block';
+                } else {
+                    app.style.display = 'none';
+                }
+            });
+            
+            showNotification(`Filtered applications by ${filter}`, 'info');
+        }
+        
+        function sortApplications() {
+            const sortBy = document.getElementById('sortBy').value;
+            showNotification(`Applications sorted by ${sortBy}`, 'info');
+        }
+        
+        function approveApplication(playerId) {
+            if (confirm('Are you sure you want to approve this application?')) {
+                showNotification(`Application for ${playerId} approved successfully!`, 'success');
+                // Update UI to show approved status
+                updateApplicationStatus(playerId, 'approved');
+            }
+        }
+        
+        function rejectApplication(playerId) {
+            if (confirm('Are you sure you want to reject this application?')) {
+                showNotification(`Application for ${playerId} rejected.`, 'info');
+                // Update UI to show rejected status
+                updateApplicationStatus(playerId, 'rejected');
+            }
+        }
+        
+        function updateApplicationStatus(playerId, status) {
+            // In a real app, this would update the database
+            const statusBadges = {
+                'approved': '<span class="badge badge-success">Approved</span>',
+                'rejected': '<span class="badge badge-error">Rejected</span>',
+                'pending': '<span class="badge badge-warning">Pending Review</span>'
+            };
+            
+            // Find and update the status badge (simplified for demo)
+            console.log(`Updated ${playerId} status to ${status}`);
+        }
+        
+        function viewFullApplication(playerId) {
+            showNotification(`Opening full application for ${playerId}`, 'info');
+        }
+        
+        function contactApplicant(playerId) {
+            window.location.href = 'scout-messages.html';
+        }
+        
+        function scheduleInterview(playerId) {
+            showNotification(`Opening interview scheduler for ${playerId}`, 'info');
+        }
+        
+        function addNote(playerId) {
+            const note = prompt('Add a note about this application:');
+            if (note) {
+                showNotification('Note added successfully!', 'success');
+            }
+        }
+        
+        function viewContract(playerId) {
+            showNotification(`Opening contract details for ${playerId}`, 'info');
+        }
+        
+        function trackProgress(playerId) {
+            showNotification(`Opening progress tracker for ${playerId}`, 'info');
+        }
+        
+        function provideFeedback(playerId) {
+            const feedback = prompt('Update feedback for this application:');
+            if (feedback) {
+                showNotification('Feedback updated successfully!', 'success');
+            }
+        }
+        
+        function reconsiderApplication(playerId) {
+            if (confirm('Are you sure you want to reconsider this application?')) {
+                showNotification(`Application for ${playerId} moved back to pending review.`, 'info');
+                updateApplicationStatus(playerId, 'pending');
+            }
+        }
+        
+        function archiveApplication(playerId) {
+            if (confirm('Are you sure you want to archive this application?')) {
+                showNotification(`Application for ${playerId} archived.`, 'info');
+            }
+        }
+    </script>
+</body>
+</html>

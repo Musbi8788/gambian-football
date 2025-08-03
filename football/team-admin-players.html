@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players Management - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="team-admin-dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="team-admin-players.html" class="nav-item active">
+                    <i class="fas fa-users"></i>
+                    <span>Players</span>
+                </a>
+                <a href="team-admin-profile.html" class="nav-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Club Profile</span>
+                </a>
+                <a href="team-admin-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">8</span>
+                </a>
+                <a href="team-admin-applications.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                    <span class="badge badge-warning">12</span>
+                </a>
+                <a href="team-admin-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="team-admin-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="team-admin-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Admin" alt="Admin Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-role">Admin - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Players Management</h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-filters">
+                        <select id="positionFilter" onchange="filterPlayers()">
+                            <option value="all">All Positions</option>
+                            <option value="goalkeeper">Goalkeepers</option>
+                            <option value="defender">Defenders</option>
+                            <option value="midfielder">Midfielders</option>
+                            <option value="forward">Forwards</option>
+                        </select>
+                        <select id="statusFilter" onchange="filterPlayers()">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="injured">Injured</option>
+                            <option value="suspended">Suspended</option>
+                            <option value="loan">On Loan</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="addPlayer()">
+                        <i class="fas fa-plus"></i>
+                        Add Player
+                    </button>
+                </div>
+            </header>
+
+            <!-- Players Content -->
+            <div class="dashboard-content">
+                <!-- Squad Stats -->
+                <section class="stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Total Players</h3>
+                                <div class="stat-icon primary">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">28</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+3 this month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Active Players</h3>
+                                <div class="stat-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">25</div>
+                            <div class="stat-change">
+                                <i class="fas fa-minus"></i>
+                                <span>Available for selection</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Injured Players</h3>
+                                <div class="stat-icon error">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">2</div>
+                            <div class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                <span>Expected return: 2 weeks</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Average Age</h3>
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">24.5</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-0.5 years younger</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Players List -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2>Squad List</h2>
+                        <div class="view-controls">
+                            <button class="view-btn active" data-view="grid" onclick="switchView('grid')">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn" data-view="list" onclick="switchView('list')">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Grid View -->
+                    <div class="players-grid" id="gridView">
+                        <!-- Player Card 1 -->
+                        <div class="card player-card" data-position="goalkeeper" data-status="active">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-photo-section">
+                                        <img src="/placeholder.svg?height=80&width=80&text=GK" alt="Player Photo" class="player-photo">
+                                        <div class="player-number">1</div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-success">Active</span>
+                                        <div class="player-actions-menu">
+                                            <button class="btn btn-outline btn-sm" onclick="togglePlayerMenu(this)">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <div class="player-menu">
+                                                <button onclick="editPlayer('bakary-sanneh')">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button onclick="viewStats('bakary-sanneh')">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                    Statistics
+                                                </button>
+                                                <button onclick="viewContract('bakary-sanneh')">
+                                                    <i class="fas fa-file-contract"></i>
+                                                    Contract
+                                                </button>
+                                                <button onclick="setInjured('bakary-sanneh')">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                    Mark Injured
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="player-info">
+                                    <h3>Bakary Sanneh</h3>
+                                    <p class="player-position">Goalkeeper • 26 years old</p>
+                                    <p class="player-details">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Banjul • Joined 2022
+                                    </p>
+                                </div>
+
+                                <div class="player-stats-mini">
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Appearances</span>
+                                        <span class="stat-value">28</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Clean Sheets</span>
+                                        <span class="stat-value">15</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Saves</span>
+                                        <span class="stat-value">89</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="viewPlayerProfile('bakary-sanneh')">
+                                        <i class="fas fa-user"></i>
+                                        View Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactPlayer('bakary-sanneh')">
+                                        <i class="fas fa-comments"></i>
+                                        Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player Card 2 -->
+                        <div class="card player-card" data-position="defender" data-status="active">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-photo-section">
+                                        <img src="/placeholder.svg?height=80&width=80&text=DEF" alt="Player Photo" class="player-photo">
+                                        <div class="player-number">4</div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-success">Active</span>
+                                        <div class="player-actions-menu">
+                                            <button class="btn btn-outline btn-sm" onclick="togglePlayerMenu(this)">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <div class="player-menu">
+                                                <button onclick="editPlayer('lamin-touray')">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button onclick="viewStats('lamin-touray')">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                    Statistics
+                                                </button>
+                                                <button onclick="viewContract('lamin-touray')">
+                                                    <i class="fas fa-file-contract"></i>
+                                                    Contract
+                                                </button>
+                                                <button onclick="setInjured('lamin-touray')">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                    Mark Injured
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="player-info">
+                                    <h3>Lamin Touray</h3>
+                                    <p class="player-position">Defender • 24 years old</p>
+                                    <p class="player-details">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Brikama • Joined 2024
+                                    </p>
+                                </div>
+
+                                <div class="player-stats-mini">
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Appearances</span>
+                                        <span class="stat-value">15</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Tackles</span>
+                                        <span class="stat-value">67</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Interceptions</span>
+                                        <span class="stat-value">34</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="viewPlayerProfile('lamin-touray')">
+                                        <i class="fas fa-user"></i>
+                                        View Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactPlayer('lamin-touray')">
+                                        <i class="fas fa-comments"></i>
+                                        Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player Card 3 -->
+                        <div class="card player-card" data-position="midfielder" data-status="active">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-photo-section">
+                                        <img src="/placeholder.svg?height=80&width=80&text=MID" alt="Player Photo" class="player-photo">
+                                        <div class="player-number">8</div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-success">Active</span>
+                                        <div class="player-actions-menu">
+                                            <button class="btn btn-outline btn-sm" onclick="togglePlayerMenu(this)">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <div class="player-menu">
+                                                <button onclick="editPlayer('fatou-ceesay')">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button onclick="viewStats('fatou-ceesay')">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                    Statistics
+                                                </button>
+                                                <button onclick="viewContract('fatou-ceesay')">
+                                                    <i class="fas fa-file-contract"></i>
+                                                    Contract
+                                                </button>
+                                                <button onclick="setInjured('fatou-ceesay')">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                    Mark Injured
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="player-info">
+                                    <h3>Fatou Ceesay</h3>
+                                    <p class="player-position">Midfielder • 20 years old</p>
+                                    <p class="player-details">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Kanifing • Joined 2023
+                                    </p>
+                                </div>
+
+                                <div class="player-stats-mini">
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Appearances</span>
+                                        <span class="stat-value">25</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Goals</span>
+                                        <span class="stat-value">8</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Assists</span>
+                                        <span class="stat-value">12</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="viewPlayerProfile('fatou-ceesay')">
+                                        <i class="fas fa-user"></i>
+                                        View Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactPlayer('fatou-ceesay')">
+                                        <i class="fas fa-comments"></i>
+                                        Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player Card 4 - Injured -->
+                        <div class="card player-card" data-position="forward" data-status="injured">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-photo-section">
+                                        <img src="/placeholder.svg?height=80&width=80&text=FWD" alt="Player Photo" class="player-photo">
+                                        <div class="player-number">9</div>
+                                        <div class="injury-indicator">
+                                            <i class="fas fa-plus-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-error">Injured</span>
+                                        <div class="player-actions-menu">
+                                            <button class="btn btn-outline btn-sm" onclick="togglePlayerMenu(this)">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                            <div class="player-menu">
+                                                <button onclick="editPlayer('amadou-jallow')">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button onclick="updateInjury('amadou-jallow')">
+                                                    <i class="fas fa-notes-medical"></i>
+                                                    Update Injury
+                                                </button>
+                                                <button onclick="setRecovered('amadou-jallow')">
+                                                    <i class="fas fa-check"></i>
+                                                    Mark Recovered
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="player-info">
+                                    <h3>Amadou Jallow</h3>
+                                    <p class="player-position">Forward • 22 years old</p>
+                                    <p class="player-details">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Banjul • Joined 2023
+                                    </p>
+                                </div>
+
+                                <div class="injury-info">
+                                    <div class="injury-details">
+                                        <i class="fas fa-plus-circle text-error"></i>
+                                        <div>
+                                            <h4>Hamstring Injury</h4>
+                                            <p>Expected return: 2 weeks</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="player-stats-mini">
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Appearances</span>
+                                        <span class="stat-value">20</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Goals</span>
+                                        <span class="stat-value">15</span>
+                                    </div>
+                                    <div class="stat-mini">
+                                        <span class="stat-label">Assists</span>
+                                        <span class="stat-value">6</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="updateInjury('amadou-jallow')">
+                                        <i class="fas fa-notes-medical"></i>
+                                        Update Injury
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="contactPlayer('amadou-jallow')">
+                                        <i class="fas fa-comments"></i>
+                                        Message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- List View -->
+                    <div class="players-list" id="listView" style="display: none;">
+                        <div class="card">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Player</th>
+                                            <th>Position</th>
+                                            <th>Age</th>
+                                            <th>Status</th>
+                                            <th>Appearances</th>
+                                            <th>Goals</th>
+                                            <th>Assists</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <div class="profile-card">
+                                                    <div class="profile-avatar">
+                                                        <img src="/placeholder.svg?height=32&width=32&text=GK" alt="Player">
+                                                    </div>
+                                                    <div class="profile-info">
+                                                        <h4>Bakary Sanneh</h4>
+                                                        <p>Goalkeeper</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Goalkeeper</td>
+                                            <td>26</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>28</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>
+                                                <button class="btn btn-outline btn-sm" onclick="viewPlayerProfile('bakary-sanneh')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-outline btn-sm" onclick="editPlayer('bakary-sanneh')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>
+                                                <div class="profile-card">
+                                                    <div class="profile-avatar">
+                                                        <img src="/placeholder.svg?height=32&width=32&text=DEF" alt="Player">
+                                                    </div>
+                                                    <div class="profile-info">
+                                                        <h4>Lamin Touray</h4>
+                                                        <p>Defender</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Defender</td>
+                                            <td>24</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>15</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td>
+                                                <button class="btn btn-outline btn-sm" onclick="viewPlayerProfile('lamin-touray')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-outline btn-sm" onclick="editPlayer('lamin-touray')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>
+                                                <div class="profile-card">
+                                                    <div class="profile-avatar">
+                                                        <img src="/placeholder.svg?height=32&width=32&text=MID" alt="Player">
+                                                    </div>
+                                                    <div class="profile-info">
+                                                        <h4>Fatou Ceesay</h4>
+                                                        <p>Midfielder</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Midfielder</td>
+                                            <td>20</td>
+                                            <td><span class="badge badge-success">Active</span></td>
+                                            <td>25</td>
+                                            <td>8</td>
+                                            <td>12</td>
+                                            <td>
+                                                <button class="btn btn-outline btn-sm" onclick="viewPlayerProfile('fatou-ceesay')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-outline btn-sm" onclick="editPlayer('fatou-ceesay')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>
+                                                <div class="profile-card">
+                                                    <div class="profile-avatar">
+                                                        <img src="/placeholder.svg?height=32&width=32&text=FWD" alt="Player">
+                                                    </div>
+                                                    <div class="profile-info">
+                                                        <h4>Amadou Jallow</h4>
+                                                        <p>Forward</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Forward</td>
+                                            <td>22</td>
+                                            <td><span class="badge badge-error">Injured</span></td>
+                                            <td>20</td>
+                                            <td>15</td>
+                                            <td>6</td>
+                                            <td>
+                                                <button class="btn btn-outline btn-sm" onclick="updateInjury('amadou-jallow')">
+                                                    <i class="fas fa-notes-medical"></i>
+                                                </button>
+                                                <button class="btn btn-outline btn-sm" onclick="editPlayer('amadou-jallow')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .header-filters {
+            display: flex;
+            gap: var(--space);
+            align-items: center;
+        }
+        
+        .header-filters select {
+            padding: var(--space-sm) var(--space);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            background: var(--background);
+        }
+        
+        .view-controls {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .view-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: var(--space-sm);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .view-btn:hover {
+            background: var(--surface-alt);
+        }
+        
+        .view-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+        }
+        
+        .player-card {
+            transition: var(--transition);
+        }
+        
+        .player-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-photo-section {
+            position: relative;
+        }
+        
+        .player-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+        }
+        
+        .player-number {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: var(--primary-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 2px solid white;
+        }
+        
+        .injury-indicator {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            background: var(--error);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            border: 2px solid white;
+        }
+        
+        .player-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .player-actions-menu {
+            position: relative;
+        }
+        
+        .player-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            min-width: 150px;
+            display: none;
+        }
+        
+        .player-menu.active {
+            display: block;
+        }
+        
+        .player-menu button {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: var(--space) var(--space-lg);
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--space);
+            font-size: 0.875rem;
+        }
+        
+        .player-menu button:hover {
+            background: var(--surface-alt);
+        }
+        
+        .player-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .player-position {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .player-details {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-details i {
+            margin-right: var(--space-sm);
+        }
+        
+        .player-stats-mini {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+        }
+        
+        .stat-mini {
+            text-align: center;
+        }
+        
+        .stat-mini .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-mini .stat-value {
+            display: block;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .injury-info {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: var(--radius-lg);
+        }
+        
+        .injury-details {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space);
+        }
+        
+        .injury-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .injury-details p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .player-actions {
+            display: flex;
+            gap: var(--space);
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .players-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-filters {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .player-header {
+                flex-direction: column;
+                gap: var(--space-lg);
+                text-align: center;
+            }
+            
+            .player-stats-mini {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .player-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+    
+    <script>
+        // Players management functionality
+        function filterPlayers() {
+            const positionFilter = document.getElementById('positionFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const playerCards = document.querySelectorAll('.player-card');
+            
+            playerCards.forEach(card => {
+                const position = card.dataset.position;
+                const status = card.dataset.status;
+                
+                let showPosition = positionFilter === 'all' || position === positionFilter;
+                let showStatus = statusFilter === 'all' || status === statusFilter;
+                
+                if (showPosition && showStatus) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            showNotification(`Filtered players by ${positionFilter} position and ${statusFilter} status`, 'info');
+        }
+        
+        function switchView(view) {
+            const gridView = document.getElementById('gridView');
+            const listView = document.getElementById('listView');
+            const viewBtns = document.querySelectorAll('.view-btn');
+            
+            // Remove active class from all buttons
+            viewBtns.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            document.querySelector(`[data-view="${view}"]`).classList.add('active');
+            
+            if (view === 'grid') {
+                gridView.style.display = 'grid';
+                listView.style.display = 'none';
+            } else {
+                gridView.style.display = 'none';
+                listView.style.display = 'block';
+            }
+            
+            showNotification(`Switched to ${view} view`, 'info');
+        }
+        
+        function togglePlayerMenu(button) {
+            const menu = button.nextElementSibling;
+            const allMenus = document.querySelectorAll('.player-menu');
+            
+            // Close all other menus
+            allMenus.forEach(m => {
+                if (m !== menu) m.classList.remove('active');
+            });
+            
+            // Toggle current menu
+            menu.classList.toggle('active');
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function closeMenu(e) {
+                if (!button.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove('active');
+                    document.removeEventListener('click', closeMenu);
+                }
+            });
+        }
+        
+        function addPlayer() {
+            showNotification('Opening player registration form...', 'info');
+        }
+        
+        function editPlayer(playerId) {
+            showNotification(`Opening editor for ${playerId}`, 'info');
+        }
+        
+        function viewPlayerProfile(playerId) {
+            showNotification(`Opening profile for ${playerId}`, 'info');
+        }
+        
+        function viewStats(playerId) {
+            showNotification(`Opening statistics for ${playerId}`, 'info');
+        }
+        
+        function viewContract(playerId) {
+            showNotification(`Opening contract details for ${playerId}`, 'info');
+        }
+        
+        function contactPlayer(playerId) {
+            window.location.href = 'team-admin-messages.html';
+        }
+        
+        function setInjured(playerId) {
+            const reason = prompt('Enter injury details:');
+            if (reason) {
+                showNotification(`${playerId} marked as injured: ${reason}`, 'warning');
+            }
+        }
+        
+        function updateInjury(playerId) {
+            showNotification(`Opening injury update form for ${playerId}`, 'info');
+        }
+        
+        function setRecovered(playerId) {
+            if (confirm('Mark this player as recovered?')) {
+                showNotification(`${playerId} marked as recovered and available for selection`, 'success');
+            }
+        }
+    </script>
+</body>
+</html>

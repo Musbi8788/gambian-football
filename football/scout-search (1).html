@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Search - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="scout-dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="scout-search.html" class="nav-item active">
+                    <i class="fas fa-search"></i>
+                    <span>Player Search</span>
+                </a>
+                <a href="scout-profile.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+                <a href="scout-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">5</span>
+                </a>
+                <a href="scout-applications.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                </a>
+                <a href="scout-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="scout-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="scout-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Scout" alt="Scout Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">John Smith</div>
+                        <div class="user-role">Scout - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Player Search</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" onclick="saveSearch()">
+                        <i class="fas fa-save"></i>
+                        Save Search
+                    </button>
+                </div>
+            </header>
+
+            <!-- Search Content -->
+            <div class="dashboard-content">
+                <!-- Search Filters -->
+                <section class="search-filters-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Search Filters</h3>
+                            <button class="btn btn-outline btn-sm" onclick="clearFilters()">
+                                <i class="fas fa-times"></i>
+                                Clear All
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <form id="searchForm" class="search-form">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="searchQuery">Search Keywords</label>
+                                        <input type="text" id="searchQuery" name="searchQuery" placeholder="Player name, club, or keywords">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="position">Position</label>
+                                        <select id="position" name="position">
+                                            <option value="">All Positions</option>
+                                            <option value="goalkeeper">Goalkeeper</option>
+                                            <option value="defender">Defender</option>
+                                            <option value="midfielder">Midfielder</option>
+                                            <option value="forward">Forward</option>
+                                            <option value="winger">Winger</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ageRange">Age Range</label>
+                                        <select id="ageRange" name="ageRange">
+                                            <option value="">Any Age</option>
+                                            <option value="16-18">16-18 years</option>
+                                            <option value="19-21">19-21 years</option>
+                                            <option value="22-25">22-25 years</option>
+                                            <option value="26-30">26-30 years</option>
+                                            <option value="30+">30+ years</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="region">Region</label>
+                                        <select id="region" name="region">
+                                            <option value="">All Regions</option>
+                                            <option value="banjul">Banjul</option>
+                                            <option value="kanifing">Kanifing</option>
+                                            <option value="brikama">Brikama</option>
+                                            <option value="mansakonko">Mansakonko</option>
+                                            <option value="kerewan">Kerewan</option>
+                                            <option value="kuntaur">Kuntaur</option>
+                                            <option value="janjanbureh">Janjanbureh</option>
+                                            <option value="basse">Basse</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="availability">Availability</label>
+                                        <select id="availability" name="availability">
+                                            <option value="">Any Status</option>
+                                            <option value="available">Available for Transfer</option>
+                                            <option value="trial">Open to Trials</option>
+                                            <option value="contract">Under Contract</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="experience">Experience Level</label>
+                                        <select id="experience" name="experience">
+                                            <option value="">Any Experience</option>
+                                            <option value="1-2">1-2 years</option>
+                                            <option value="3-5">3-5 years</option>
+                                            <option value="6-10">6-10 years</option>
+                                            <option value="10+">10+ years</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="search-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                        Search Players
+                                    </button>
+                                    <button type="button" class="btn btn-outline" onclick="loadSavedSearches()">
+                                        <i class="fas fa-bookmark"></i>
+                                        Saved Searches
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search Results -->
+                <section class="search-results-section">
+                    <div class="section-header">
+                        <h2>Search Results</h2>
+                        <div class="results-info">
+                            <span id="resultsCount">24 players found</span>
+                            <select id="sortBy" onchange="sortResults()">
+                                <option value="relevance">Sort by Relevance</option>
+                                <option value="age">Sort by Age</option>
+                                <option value="rating">Sort by Rating</option>
+                                <option value="recent">Recently Updated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="search-results" id="searchResults">
+                        <!-- Player Result Card 1 -->
+                        <div class="card player-result-card">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=80&width=80&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Amadou Jallow</h3>
+                                            <p class="player-position">Forward • 22 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Banjul • Hawks FC
+                                            </p>
+                                            <div class="player-rating">
+                                                <div class="stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <span>4.8/5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-success">Available</span>
+                                        <button class="btn btn-outline btn-sm favorite-btn" onclick="toggleFavorite(this)">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="player-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Goals</span>
+                                        <span class="stat-value">18</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Assists</span>
+                                        <span class="stat-value">7</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Matches</span>
+                                        <span class="stat-value">25</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Experience</span>
+                                        <span class="stat-value">5 years</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Strengths</h4>
+                                    <div class="highlights-list">
+                                        <span class="highlight-tag">Clinical Finishing</span>
+                                        <span class="highlight-tag">Aerial Ability</span>
+                                        <span class="highlight-tag">Leadership</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="contactPlayer('amadou-jallow')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact Player
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewPlayer('amadou-jallow')">
+                                        <i class="fas fa-eye"></i>
+                                        View Full Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="addToShortlist('amadou-jallow')">
+                                        <i class="fas fa-bookmark"></i>
+                                        Shortlist
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player Result Card 2 -->
+                        <div class="card player-result-card">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=80&width=80&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Fatou Ceesay</h3>
+                                            <p class="player-position">Midfielder • 20 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Kanifing • Real de Banjul
+                                            </p>
+                                            <div class="player-rating">
+                                                <div class="stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
+                                                <span>4.6/5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-warning">Trial</span>
+                                        <button class="btn btn-outline btn-sm favorite-btn" onclick="toggleFavorite(this)">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="player-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Pass Accuracy</span>
+                                        <span class="stat-value">89%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Assists</span>
+                                        <span class="stat-value">12</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Matches</span>
+                                        <span class="stat-value">23</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Experience</span>
+                                        <span class="stat-value">3 years</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Strengths</h4>
+                                    <div class="highlights-list">
+                                        <span class="highlight-tag">Vision</span>
+                                        <span class="highlight-tag">Ball Control</span>
+                                        <span class="highlight-tag">Work Rate</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="contactPlayer('fatou-ceesay')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact Player
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewPlayer('fatou-ceesay')">
+                                        <i class="fas fa-eye"></i>
+                                        View Full Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="addToShortlist('fatou-ceesay')">
+                                        <i class="fas fa-bookmark"></i>
+                                        Shortlist
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player Result Card 3 -->
+                        <div class="card player-result-card">
+                            <div class="card-content">
+                                <div class="player-header">
+                                    <div class="player-info">
+                                        <img src="/placeholder.svg?height=80&width=80&text=Player" alt="Player Photo" class="player-photo">
+                                        <div class="player-details">
+                                            <h3>Lamin Touray</h3>
+                                            <p class="player-position">Defender • 24 years old</p>
+                                            <p class="player-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                Brikama • Wallidan FC
+                                            </p>
+                                            <div class="player-rating">
+                                                <div class="stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
+                                                <span>4.4/5</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="player-status">
+                                        <span class="badge badge-error">Contract</span>
+                                        <button class="btn btn-outline btn-sm favorite-btn favorited" onclick="toggleFavorite(this)">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="player-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Tackles</span>
+                                        <span class="stat-value">156</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Interceptions</span>
+                                        <span class="stat-value">89</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Matches</span>
+                                        <span class="stat-value">28</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Experience</span>
+                                        <span class="stat-value">6 years</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-highlights">
+                                    <h4>Key Strengths</h4>
+                                    <div class="highlights-list">
+                                        <span class="highlight-tag">Defensive Positioning</span>
+                                        <span class="highlight-tag">Aerial Duels</span>
+                                        <span class="highlight-tag">Communication</span>
+                                    </div>
+                                </div>
+
+                                <div class="player-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="contactPlayer('lamin-touray')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact Player
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewPlayer('lamin-touray')">
+                                        <i class="fas fa-eye"></i>
+                                        View Full Profile
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="addToShortlist('lamin-touray')">
+                                        <i class="fas fa-bookmark"></i>
+                                        Shortlist
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-section">
+                        <div class="pagination">
+                            <button class="btn btn-outline btn-sm" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </button>
+                            <div class="page-numbers">
+                                <button class="btn btn-primary btn-sm">1</button>
+                                <button class="btn btn-outline btn-sm">2</button>
+                                <button class="btn btn-outline btn-sm">3</button>
+                                <span>...</span>
+                                <button class="btn btn-outline btn-sm">8</button>
+                            </div>
+                            <button class="btn btn-outline btn-sm">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .search-form {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .search-actions {
+            display: flex;
+            gap: var(--space);
+            justify-content: flex-end;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border);
+        }
+        
+        .results-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+        
+        .results-info span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .results-info select {
+            padding: var(--space-sm) var(--space);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+        }
+        
+        .search-results {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .player-result-card {
+            transition: var(--transition);
+        }
+        
+        .player-result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-info {
+            display: flex;
+            gap: var(--space-lg);
+            flex: 1;
+        }
+        
+        .player-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border);
+        }
+        
+        .player-details h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .player-position {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .player-location {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .player-location i {
+            margin-right: var(--space-sm);
+        }
+        
+        .player-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .stars {
+            color: var(--warning);
+        }
+        
+        .player-rating span {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .player-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space);
+        }
+        
+        .favorite-btn {
+            padding: var(--space-sm);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorite-btn.favorited {
+            color: var(--error);
+            border-color: var(--error);
+        }
+        
+        .player-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .player-highlights {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .player-highlights h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space);
+        }
+        
+        .highlights-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+        
+        .highlight-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-blue);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .player-actions {
+            display: flex;
+            gap: var(--space);
+            flex-wrap: wrap;
+        }
+        
+        .pagination-section {
+            margin-top: var(--space-xl);
+            display: flex;
+            justify-content: center;
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: var(--space);
+        }
+        
+        .page-numbers {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .player-header {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .player-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .player-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .player-actions {
+                justify-content: center;
+            }
+            
+            .search-actions {
+                flex-direction: column;
+            }
+            
+            .results-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space);
+            }
+        }
+    </style>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+        
+        function performSearch() {
+            const submitBtn = document.querySelector('#searchForm button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                showNotification('Search completed! Found 24 players matching your criteria.', 'success');
+            }, 2000);
+        }
+        
+        function clearFilters() {
+            document.getElementById('searchForm').reset();
+            showNotification('All filters cleared', 'info');
+        }
+        
+        function saveSearch() {
+            showNotification('Search criteria saved successfully!', 'success');
+        }
+        
+        function loadSavedSearches() {
+            showNotification('Loading saved searches...', 'info');
+        }
+        
+        function sortResults() {
+            const sortBy = document.getElementById('sortBy').value;
+            showNotification(`Results sorted by ${sortBy}`, 'info');
+        }
+        
+        function toggleFavorite(button) {
+            const icon = button.querySelector('i');
+            if (button.classList.contains('favorited')) {
+                button.classList.remove('favorited');
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                showNotification('Removed from favorites', 'info');
+            } else {
+                button.classList.add('favorited');
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                showNotification('Added to favorites', 'success');
+            }
+        }
+        
+        function addToShortlist(playerId) {
+            showNotification('Player added to shortlist', 'success');
+        }
+        
+        function viewConversation(playerId) {
+            window.location.href = 'scout-messages.html';
+        }
+    </script>
+</body>
+</html>

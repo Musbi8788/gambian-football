@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Profile - ScoutMe Gambia</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <span class="logo-text">ScoutMe</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="team-admin-dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="team-admin-players.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Players</span>
+                </a>
+                <a href="team-admin-profile.html" class="nav-item active">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Club Profile</span>
+                </a>
+                <a href="team-admin-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">8</span>
+                </a>
+                <a href="team-admin-applications.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Applications</span>
+                    <span class="badge badge-warning">12</span>
+                </a>
+                <a href="team-admin-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="team-admin-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="team-admin-settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Admin" alt="Admin Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">Sarah Johnson</div>
+                        <div class="user-role">Admin - Hawks FC</div>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Club Profile</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" onclick="saveClubProfile()">
+                        <i class="fas fa-save"></i>
+                        Save Changes
+                    </button>
+                </div>
+            </header>
+
+            <!-- Profile Content -->
+            <div class="dashboard-content">
+                <!-- Club Header -->
+                <section class="profile-header-section">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="club-header-content">
+                                <div class="club-logo-section">
+                                    <div class="club-logo-large">
+                                        <img src="/placeholder.svg?height=120&width=120&text=Hawks FC" alt="Club Logo" id="clubLogo">
+                                        <div class="logo-overlay">
+                                            <button class="logo-upload-btn" onclick="uploadClubLogo()">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <input type="file" id="clubLogoInput" accept="image/*" style="display: none;">
+                                </div>
+                                <div class="club-header-info">
+                                    <h2>Hawks Football Club</h2>
+                                    <p class="club-division">First Division • Founded 1975</p>
+                                    <p class="club-location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Banjul, The Gambia
+                                    </p>
+                                    <div class="club-stats-quick">
+                                        <div class="quick-stat">
+                                            <span class="stat-value">28</span>
+                                            <span class="stat-label">Squad Size</span>
+                                        </div>
+                                        <div class="quick-stat">
+                                            <span class="stat-value">48</span>
+                                            <span class="stat-label">Years Active</span>
+                                        </div>
+                                        <div class="quick-stat">
+                                            <span class="stat-value">12</span>
+                                            <span class="stat-label">Trophies Won</span>
+                                        </div>
+                                        <div class="quick-stat">
+                                            <span class="stat-value">4.7</span>
+                                            <span class="stat-label">Club Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Club Profile Form -->
+                <section class="profile-form-section">
+                    <form id="clubProfileForm" class="profile-form">
+                        <!-- Basic Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Basic Information</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="clubName">Club Name</label>
+                                        <input type="text" id="clubName" name="clubName" value="Hawks Football Club" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="shortName">Short Name</label>
+                                        <input type="text" id="shortName" name="shortName" value="Hawks FC" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="foundedYear">Founded Year</label>
+                                        <input type="number" id="foundedYear" name="foundedYear" value="1975" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="division">Division</label>
+                                        <select id="division" name="division" required>
+                                            <option value="first" selected>First Division</option>
+                                            <option value="second">Second Division</option>
+                                            <option value="third">Third Division</option>
+                                            <option value="youth">Youth League</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Contact Information</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="email">Official Email</label>
+                                        <input type="email" id="email" name="email" value="info@hawksfc.gm" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" value="+220 123 4567" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="website">Website</label>
+                                        <input type="url" id="website" name="website" value="https://www.hawksfc.gm">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="region">Region</label>
+                                        <select id="region" name="region" required>
+                                            <option value="banjul" selected>Banjul</option>
+                                            <option value="kanifing">Kanifing</option>
+                                            <option value="brikama">Brikama</option>
+                                            <option value="mansakonko">Mansakonko</option>
+                                            <option value="kerewan">Kerewan</option>
+                                            <option value="kuntaur">Kuntaur</option>
+                                            <option value="janjanbureh">Janjanbureh</option>
+                                            <option value="basse">Basse</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <textarea id="address" name="address" rows="3" placeholder="Enter club address">Independence Drive, Banjul, The Gambia</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Facilities Information -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Facilities & Venues</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="homeStadium">Home Stadium</label>
+                                        <input type="text" id="homeStadium" name="homeStadium" value="Hawks Stadium" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stadiumCapacity">Stadium Capacity</label>
+                                        <input type="number" id="stadiumCapacity" name="stadiumCapacity" value="5000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="trainingGround">Training Ground</label>
+                                        <input type="text" id="trainingGround" name="trainingGround" value="Hawks Training Center">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="youthAcademy">Youth Academy</label>
+                                        <select id="youthAcademy" name="youthAcademy">
+                                            <option value="yes" selected>Yes</option>
+                                            <option value="no">No</option>
+                                            <option value="planned">Planned</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Available Facilities</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="gym" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Gymnasium</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="medical" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Medical Center</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="dormitory">
+                                            <span class="checkbox-custom"></span>
+                                            <span>Player Dormitory</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="restaurant" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Restaurant/Cafeteria</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="parking" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Parking</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="facilities" value="shop">
+                                            <span class="checkbox-custom"></span>
+                                            <span>Club Shop</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Club History & Achievements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>History & Achievements</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-group">
+                                    <label for="clubHistory">Club History</label>
+                                    <textarea id="clubHistory" name="clubHistory" rows="5" placeholder="Tell the story of your club">Hawks Football Club was founded in 1975 and has been a cornerstone of Gambian football for nearly five decades. Starting as a community team in Banjul, we have grown to become one of the most respected clubs in The Gambia, known for our commitment to developing local talent and playing attractive football.
+
+Our club has always prioritized youth development, establishing one of the first structured youth academies in the country. Over the years, we have produced numerous players who have gone on to represent The Gambia at international level.</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="majorAchievements">Major Achievements</label>
+                                    <textarea id="majorAchievements" name="majorAchievements" rows="4" placeholder="List your major trophies and achievements">• GFA League Champions: 1985, 1992, 1998, 2003, 2015
+• FA Cup Winners: 1987, 1995, 2001, 2008, 2018
+• Super Cup Winners: 1999, 2004, 2016
+• CAF Champions League Quarter-finalists: 2016
+• Produced 15+ international players for The Gambia national team
+• Youth Academy of the Year: 2019, 2021</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clubMotto">Club Motto</label>
+                                    <input type="text" id="clubMotto" name="clubMotto" value="Soar High, Play with Pride" placeholder="Enter club motto">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clubColors">Club Colors</label>
+                                    <input type="text" id="clubColors" name="clubColors" value="Blue and White" placeholder="e.g., Red and Blue">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Management & Staff -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Management & Staff</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="president">Club President</label>
+                                        <input type="text" id="president" name="president" value="Alhaji Mamadou Tangara">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="headCoach">Head Coach</label>
+                                        <input type="text" id="headCoach" name="headCoach" value="Omar Sise">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="assistantCoach">Assistant Coach</label>
+                                        <input type="text" id="assistantCoach" name="assistantCoach" value="Lamin Kaba Bajo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="teamManager">Team Manager</label>
+                                        <input type="text" id="teamManager" name="teamManager" value="Sarah Johnson">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="medicalStaff">Medical Staff</label>
+                                        <input type="text" id="medicalStaff" name="medicalStaff" value="Dr. Fatou Jallow">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="youthCoordinator">Youth Coordinator</label>
+                                        <input type="text" id="youthCoordinator" name="youthCoordinator" value="Bubacarr Jobe">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media & Marketing -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Social Media & Marketing</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook Page</label>
+                                        <input type="url" id="facebook" name="facebook" value="https://facebook.com/hawksfc" placeholder="https://facebook.com/yourclub">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter Handle</label>
+                                        <input type="text" id="twitter" name="twitter" value="@HawksFC_Official" placeholder="@yourclub">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <input type="text" id="instagram" name="instagram" value="@hawksfc_official" placeholder="@yourclub">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="youtube">YouTube Channel</label>
+                                        <input type="url" id="youtube" name="youtube" value="https://youtube.com/hawksfc" placeholder="https://youtube.com/yourclub">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="marketingDescription">Marketing Description</label>
+                                    <textarea id="marketingDescription" name="marketingDescription" rows="3" placeholder="Brief description for marketing purposes">Hawks FC - Where tradition meets ambition. Join us as we soar to new heights in Gambian football, developing the stars of tomorrow while honoring our rich heritage.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recruitment Preferences -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Recruitment Preferences</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="targetAgeGroup">Target Age Group</label>
+                                        <select id="targetAgeGroup" name="targetAgeGroup">
+                                            <option value="youth">Youth (16-21)</option>
+                                            <option value="senior" selected>Senior (22-30)</option>
+                                            <option value="experienced">Experienced (30+)</option>
+                                            <option value="all">All Age Groups</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recruitmentBudget">Monthly Recruitment Budget</label>
+                                        <select id="recruitmentBudget" name="recruitmentBudget">
+                                            <option value="low">GMD 10,000 - 50,000</option>
+                                            <option value="medium" selected>GMD 50,000 - 150,000</option>
+                                            <option value="high">GMD 150,000 - 500,000</option>
+                                            <option value="premium">GMD 500,000+</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recruitmentRadius">Recruitment Radius</label>
+                                        <select id="recruitmentRadius" name="recruitmentRadius">
+                                            <option value="local">Local Region Only</option>
+                                            <option value="national" selected>Nationwide</option>
+                                            <option value="regional">West Africa</option>
+                                            <option value="international">International</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="priorityPositions">Priority Positions</label>
+                                        <select id="priorityPositions" name="priorityPositions" multiple>
+                                            <option value="goalkeeper">Goalkeeper</option>
+                                            <option value="defender" selected>Defender</option>
+                                            <option value="midfielder" selected>Midfielder</option>
+                                            <option value="forward">Forward</option>
+                                            <option value="winger">Winger</option>
+                                        </select>
+                                        <small>Hold Ctrl/Cmd to select multiple positions</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Recruitment Preferences</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="recruitmentPrefs" value="local" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Prioritize local talent</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="recruitmentPrefs" value="youth" checked>
+                                            <span class="checkbox-custom"></span>
+                                            <span>Focus on youth development</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="recruitmentPrefs" value="experience">
+                                            <span class="checkbox-custom"></span>
+                                            <span>Seek experienced players</span>
+                                        </label>
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" name="recruitmentPrefs" value="international">
+                                            <span class="checkbox-custom"></span>
+                                            <span>Open to international players</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" onclick="resetForm()">
+                                <i class="fas fa-undo"></i>
+                                Reset Changes
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Save Club Profile
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+    <style>
+        .club-header-content {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        
+        .club-logo-section {
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .club-logo-large {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            position: relative;
+            border: 4px solid var(--border);
+        }
+        
+        .club-logo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .club-logo-large:hover .logo-overlay {
+            opacity: 1;
+        }
+        
+        .logo-upload-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--space);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .logo-upload-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .club-header-info {
+            flex: 1;
+        }
+        
+        .club-header-info h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .club-division {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .club-location {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .club-stats-quick {
+            display: flex;
+            gap: var(--space-xl);
+        }
+        
+        .quick-stat {
+            text-align: center;
+        }
+        
+        .quick-stat .stat-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .quick-stat .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space);
+            margin-top: var(--space);
+        }
+        
+        @media (max-width: 768px) {
+            .club-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .club-stats-quick {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: var(--space);
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <script>
+        // Club profile specific JavaScript
+        document.getElementById('clubProfileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveClubProfile();
+        });
+
+        function uploadClubLogo() {
+            document.getElementById('clubLogoInput').click();
+        }
+
+        document.getElementById('clubLogoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('clubLogo').src = e.target.result;
+                    showNotification('Club logo updated successfully!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function saveClubProfile() {
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                showNotification('Club profile updated successfully!', 'success');
+            }, 2000);
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all changes? This will restore your profile to the last saved version.')) {
+                document.getElementById('clubProfileForm').reset();
+                showNotification('Profile reset to last saved version', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
