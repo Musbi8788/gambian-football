@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Dashboard - ScoutMe Gambia</title>
+    <title>Scout Dashboard - ScoutMe Gambia</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -14,42 +14,42 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
-                    <img src="/placeholder.svg?height=40&width=40&text=Logo" alt="ScoutMe Gambia" class="logo">
+                    <img src="assets/images/scoutme-logo.png" alt="ScoutMe Gambia" class="logo">
                     <span class="logo-text">ScoutMe</span>
                 </div>
             </div>
 
             <nav class="sidebar-nav">
-                <a href="player-dashboard.html" class="nav-item active">
+                <a href="scout-dashboard.html" class="nav-item active">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="player-profile.html" class="nav-item">
+                <a href="scout-search.html" class="nav-item">
+                    <i class="fas fa-search"></i>
+                    <span>Player Search</span>
+                </a>
+                <a href="scout-profile.html" class="nav-item">
                     <i class="fas fa-user"></i>
                     <span>My Profile</span>
                 </a>
-                <a href="player-videos.html" class="nav-item">
-                    <i class="fas fa-video"></i>
-                    <span>Videos</span>
+                <a href="scout-messages.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge badge-primary">5</span>
                 </a>
-                <a href="player-stats.html" class="nav-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Statistics</span>
-                </a>
-                <a href="player-applications.html" class="nav-item">
+                <a href="scout-applications.html" class="nav-item">
                     <i class="fas fa-file-alt"></i>
                     <span>Applications</span>
                 </a>
-                <a href="player-messages.html" class="nav-item">
-                    <i class="fas fa-comments"></i>
-                    <span>Messages</span>
-                    <span class="badge badge-primary">3</span>
-                </a>
-                <a href="opportunities.html" class="nav-item">
-                    <i class="fas fa-search"></i>
+                <a href="scout-opportunities.html" class="nav-item">
+                    <i class="fas fa-bullhorn"></i>
                     <span>Opportunities</span>
                 </a>
-                <a href="player-settings.html" class="nav-item">
+                <a href="scout-statistics.html" class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="scout-settings.html" class="nav-item">
                     <i class="fas fa-cog"></i>
                     <span>Settings</span>
                 </a>
@@ -58,11 +58,11 @@
             <div class="sidebar-footer">
                 <div class="user-info">
                     <div class="user-avatar">
-                        <img src="/placeholder.svg?height=40&width=40&text=Player" alt="Player Avatar">
+                        <img src="/placeholder.svg?height=40&width=40&text=Scout" alt="Scout Avatar">
                     </div>
                     <div class="user-details">
-                        <div class="user-name">Amadou Jallow</div>
-                        <div class="user-role">Forward</div>
+                        <div class="user-name">John Smith</div>
+                        <div class="user-role">Scout - Hawks FC</div>
                     </div>
                 </div>
                 <button class="logout-btn" onclick="logout()">
@@ -79,13 +79,13 @@
                     <button class="sidebar-toggle" id="sidebarToggle">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1>Dashboard</h1>
+                    <h1>Scout Dashboard</h1>
                 </div>
                 <div class="header-right">
                     <div class="notifications">
                         <button class="notification-btn" onclick="toggleNotifications()">
                             <i class="fas fa-bell"></i>
-                            <span class="notification-count">5</span>
+                            <span class="notification-count">3</span>
                         </button>
                         <div class="notification-dropdown" id="notificationDropdown">
                             <div class="notification-header">
@@ -95,11 +95,11 @@
                             <div class="notification-list">
                                 <div class="notification-item unread">
                                     <div class="notification-icon">
-                                        <i class="fas fa-eye text-primary"></i>
+                                        <i class="fas fa-user-plus text-primary"></i>
                                     </div>
                                     <div class="notification-content">
-                                        <p><strong>John Smith</strong> viewed your profile</p>
-                                        <span class="notification-time">2 hours ago</span>
+                                        <p>New player <strong>Amadou Jallow</strong> matches your criteria</p>
+                                        <span class="notification-time">1 hour ago</span>
                                     </div>
                                 </div>
                                 <div class="notification-item unread">
@@ -107,8 +107,8 @@
                                         <i class="fas fa-comments text-success"></i>
                                     </div>
                                     <div class="notification-content">
-                                        <p>New message from <strong>Hawks FC</strong></p>
-                                        <span class="notification-time">1 day ago</span>
+                                        <p>Reply from <strong>Fatou Ceesay</strong></p>
+                                        <span class="notification-time">2 hours ago</span>
                                     </div>
                                 </div>
                                 <div class="notification-item">
@@ -116,13 +116,13 @@
                                         <i class="fas fa-file-alt text-info"></i>
                                     </div>
                                     <div class="notification-content">
-                                        <p>Application to <strong>Real de Banjul</strong> was reviewed</p>
-                                        <span class="notification-time">3 days ago</span>
+                                        <p>Application submitted by <strong>Lamin Touray</strong></p>
+                                        <span class="notification-time">1 day ago</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="notification-footer">
-                                <a href="player-messages.html">View all notifications</a>
+                                <a href="scout-messages.html">View all notifications</a>
                             </div>
                         </div>
                     </div>
@@ -137,17 +137,17 @@
                         <div class="card-content">
                             <div class="welcome-content">
                                 <div class="welcome-text">
-                                    <h2>Welcome back, Amadou! 👋</h2>
-                                    <p>Here's what's happening with your football career today.</p>
+                                    <h2>Welcome back, John! 🔍</h2>
+                                    <p>Discover talented players and build your recruitment pipeline.</p>
                                 </div>
                                 <div class="welcome-actions">
-                                    <a href="player-profile.html" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                        Update Profile
+                                    <a href="scout-search.html" class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                        Search Players
                                     </a>
-                                    <a href="player-videos.html" class="btn btn-outline">
-                                        <i class="fas fa-video"></i>
-                                        Upload Video
+                                    <a href="scout-opportunities.html" class="btn btn-outline">
+                                        <i class="fas fa-plus"></i>
+                                        Post Opportunity
                                     </a>
                                 </div>
                             </div>
@@ -160,57 +160,57 @@
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-header">
-                                <h3 class="stat-title">Profile Views</h3>
+                                <h3 class="stat-title">Players Viewed</h3>
                                 <div class="stat-icon primary">
                                     <i class="fas fa-eye"></i>
                                 </div>
                             </div>
-                            <div class="stat-value">247</div>
+                            <div class="stat-value">156</div>
                             <div class="stat-change positive">
                                 <i class="fas fa-arrow-up"></i>
-                                <span>+12% from last week</span>
+                                <span>+23 this week</span>
                             </div>
                         </div>
 
                         <div class="stat-card">
                             <div class="stat-header">
-                                <h3 class="stat-title">Scout Interests</h3>
+                                <h3 class="stat-title">Contacted Players</h3>
                                 <div class="stat-icon success">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="stat-value">18</div>
-                            <div class="stat-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                <span>+3 new this week</span>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <h3 class="stat-title">Applications</h3>
-                                <div class="stat-icon warning">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                            </div>
-                            <div class="stat-value">5</div>
-                            <div class="stat-change">
-                                <i class="fas fa-minus"></i>
-                                <span>2 pending review</span>
-                            </div>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <h3 class="stat-title">Messages</h3>
-                                <div class="stat-icon error">
                                     <i class="fas fa-comments"></i>
                                 </div>
                             </div>
-                            <div class="stat-value">12</div>
+                            <div class="stat-value">42</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+8 this week</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Active Searches</h3>
+                                <div class="stat-icon warning">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">7</div>
                             <div class="stat-change">
-                                <i class="fas fa-exclamation"></i>
-                                <span>3 unread</span>
+                                <i class="fas fa-minus"></i>
+                                <span>2 saved searches</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3 class="stat-title">Opportunities Posted</h3>
+                                <div class="stat-icon error">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">3</div>
+                            <div class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                <span>1 pending approval</span>
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                 <section class="content-section">
                     <div class="section-header">
                         <h2>Recent Activity</h2>
-                        <a href="player-messages.html" class="btn btn-outline btn-sm">View All</a>
+                        <a href="scout-messages.html" class="btn btn-outline btn-sm">View All</a>
                     </div>
                     <div class="card">
                         <div class="table-container">
@@ -228,9 +228,10 @@
                                 <thead>
                                     <tr>
                                         <th>Activity</th>
-                                        <th>From</th>
+                                        <th>Player</th>
                                         <th>Date</th>
                                         <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -244,58 +245,76 @@
                                         <td>
                                             <div class="profile-card">
                                                 <div class="profile-avatar">
-                                                    <img src="/placeholder.svg?height=32&width=32&text=Scout" alt="Scout">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Player" alt="Player">
                                                 </div>
                                                 <div class="profile-info">
-                                                    <h4>John Smith</h4>
-                                                    <p>Hawks FC Scout</p>
+                                                    <h4>Amadou Jallow</h4>
+                                                    <p>Forward • 22 years</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>2 hours ago</td>
-                                        <td><span class="badge badge-primary">New</span></td>
+                                        <td><span class="badge badge-primary">Interested</span></td>
+                                        <td>
+                                            <button class="btn btn-outline btn-sm" onclick="contactPlayer('amadou-jallow')">
+                                                <i class="fas fa-comments"></i>
+                                                Contact
+                                            </button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="activity-item">
                                                 <i class="fas fa-comments text-success"></i>
-                                                <span>New message</span>
+                                                <span>Message sent</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="profile-card">
                                                 <div class="profile-avatar">
-                                                    <img src="/placeholder.svg?height=32&width=32&text=Scout" alt="Scout">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Player" alt="Player">
                                                 </div>
                                                 <div class="profile-info">
-                                                    <h4>Sarah Johnson</h4>
-                                                    <p>Real de Banjul</p>
+                                                    <h4>Fatou Ceesay</h4>
+                                                    <p>Midfielder • 20 years</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>1 day ago</td>
-                                        <td><span class="badge badge-warning">Unread</span></td>
+                                        <td><span class="badge badge-success">Replied</span></td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm" onclick="viewConversation('fatou-ceesay')">
+                                                <i class="fas fa-eye"></i>
+                                                View
+                                            </button>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="activity-item">
-                                                <i class="fas fa-file-alt text-info"></i>
-                                                <span>Application submitted</span>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <span>Player shortlisted</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="profile-card">
                                                 <div class="profile-avatar">
-                                                    <img src="/placeholder.svg?height=32&width=32&text=Club" alt="Club">
+                                                    <img src="/placeholder.svg?height=32&width=32&text=Player" alt="Player">
                                                 </div>
                                                 <div class="profile-info">
-                                                    <h4>Wallidan FC</h4>
-                                                    <p>First Division</p>
+                                                    <h4>Lamin Touray</h4>
+                                                    <p>Defender • 24 years</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>3 days ago</td>
-                                        <td><span class="badge badge-success">Reviewed</span></td>
+                                        <td>2 days ago</td>
+                                        <td><span class="badge badge-warning">Shortlisted</span></td>
+                                        <td>
+                                            <button class="btn btn-outline btn-sm" onclick="viewPlayer('lamin-touray')">
+                                                <i class="fas fa-user"></i>
+                                                Profile
+                                            </button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -303,44 +322,62 @@
                     </div>
                 </section>
 
-                <!-- Opportunities -->
+                <!-- Recommended Players -->
                 <section class="content-section">
                     <div class="section-header">
-                        <h2>Recommended Opportunities</h2>
-                        <a href="opportunities.html" class="btn btn-outline btn-sm">View All</a>
+                        <h2>Recommended Players</h2>
+                        <a href="scout-search.html" class="btn btn-outline btn-sm">Advanced Search</a>
                     </div>
                     <div class="opportunities-grid">
                         <div class="card">
                             <div class="card-content">
                                 <div class="opportunity-header">
                                     <div class="club-info">
-                                        <img src="/placeholder.svg?height=40&width=40&text=Hawks" alt="Club Logo" class="club-logo">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="club-logo" style="border-radius: 50%;">
                                         <div>
-                                            <h4>Hawks FC</h4>
-                                            <p>First Division</p>
+                                            <h4>Amadou Jallow</h4>
+                                            <p>Forward • 22 years</p>
                                         </div>
                                     </div>
-                                    <span class="badge badge-success">New</span>
+                                    <span class="badge badge-success">Available</span>
                                 </div>
-                                <h3>Forward Position Available</h3>
-                                <p>Looking for a talented forward to join our first team squad for the upcoming season.</p>
+                                <div class="player-stats">
+                                    <div class="stat-row">
+                                        <span>Goals this season:</span>
+                                        <strong>18</strong>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Assists:</span>
+                                        <strong>7</strong>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Matches played:</span>
+                                        <strong>25</strong>
+                                    </div>
+                                </div>
                                 <div class="opportunity-details">
                                     <div class="detail-item">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <span>Banjul</span>
                                     </div>
                                     <div class="detail-item">
-                                        <i class="fas fa-calendar"></i>
-                                        <span>Full-time</span>
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Hawks FC</span>
                                     </div>
                                     <div class="detail-item">
-                                        <i class="fas fa-money-bill"></i>
-                                        <span>GMD 25,000/month</span>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8/5 Rating</span>
                                     </div>
                                 </div>
                                 <div class="opportunity-actions">
-                                    <button class="btn btn-primary btn-sm" onclick="applyToOpportunity('hawks-fc-forward')">Apply Now</button>
-                                    <button class="btn btn-outline btn-sm" onclick="viewOpportunity('hawks-fc-forward')">Learn More</button>
+                                    <button class="btn btn-primary btn-sm" onclick="contactPlayer('amadou-jallow')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewPlayer('amadou-jallow')">
+                                        <i class="fas fa-eye"></i>
+                                        View Profile
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -349,33 +386,51 @@
                             <div class="card-content">
                                 <div class="opportunity-header">
                                     <div class="club-info">
-                                        <img src="/placeholder.svg?height=40&width=40&text=Real" alt="Club Logo" class="club-logo">
+                                        <img src="/placeholder.svg?height=60&width=60&text=Player" alt="Player Photo" class="club-logo" style="border-radius: 50%;">
                                         <div>
-                                            <h4>Real de Banjul</h4>
-                                            <p>First Division</p>
+                                            <h4>Fatou Ceesay</h4>
+                                            <p>Midfielder • 20 years</p>
                                         </div>
                                     </div>
-                                    <span class="badge badge-warning">Urgent</span>
+                                    <span class="badge badge-warning">Trial</span>
                                 </div>
-                                <h3>Trial Opportunity</h3>
-                                <p>Join our upcoming trial sessions for promising young forwards.</p>
+                                <div class="player-stats">
+                                    <div class="stat-row">
+                                        <span>Passes completed:</span>
+                                        <strong>89%</strong>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Assists:</span>
+                                        <strong>12</strong>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Matches played:</span>
+                                        <strong>23</strong>
+                                    </div>
+                                </div>
                                 <div class="opportunity-details">
                                     <div class="detail-item">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        <span>Banjul</span>
+                                        <span>Kanifing</span>
                                     </div>
                                     <div class="detail-item">
-                                        <i class="fas fa-calendar"></i>
-                                        <span>Trial</span>
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Real de Banjul</span>
                                     </div>
                                     <div class="detail-item">
-                                        <i class="fas fa-clock"></i>
-                                        <span>2 weeks</span>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.6/5 Rating</span>
                                     </div>
                                 </div>
                                 <div class="opportunity-actions">
-                                    <button class="btn btn-primary btn-sm" onclick="applyToOpportunity('real-trial')">Apply Now</button>
-                                    <button class="btn btn-outline btn-sm" onclick="viewOpportunity('real-trial')">Learn More</button>
+                                    <button class="btn btn-primary btn-sm" onclick="contactPlayer('fatou-ceesay')">
+                                        <i class="fas fa-comments"></i>
+                                        Contact
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewPlayer('fatou-ceesay')">
+                                        <i class="fas fa-eye"></i>
+                                        View Profile
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -386,5 +441,32 @@
     </div>
 
     <script src="assets/js/dashboard.js"></script>
+    <style>
+        .player-stats {
+            margin: var(--space-lg) 0;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-row span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .stat-row strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+    </style>
 </body>
 </html>
